@@ -1,0 +1,140 @@
+
+2.
+Operação: criarRelatorio(tipo, inicio, fim, nomes)
+
+Ator principal: Administrador
+
+Referências cruzadas: Caso de uso Criar Relatório Administrativo
+
+Pré-condições:
+
+    O administrador da folha de pagamento deve estar conectado ao sistema.
+
+Pós-condições:
+
+    O sistema gera um relatório com as informações especificadas pelo Administrador da Folha de Pagamento com as informações: tipo de relatório, datas de início e fim do relatório e nome(s) do(s) funcionário(s).
+    Se o Administrador da Folha de Pagamento optar por salvar o relatório, o sistema salva o relatório no local e com o nome especificados.
+
+3.
+Operação: criarRelatorio(tipo, inicio, fim)
+
+Ator principal: Funcionário
+
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+
+Pré-condições:
+
+    O funcionário deve estar conectado ao sistema antes de iniciar o caso de uso.
+
+Pós-condições: 
+    
+    Foi gerado um relatório com os dados especificados pelo funcionário (Tipo de relatório, Datas de início e término do relatório) e, se solicitado, foi salvo com o nome e local especificados.
+
+4.
+Operação: entrar(nome, senha)
+
+Ator principal: Usuário
+
+Referências cruzadas: Caso de uso Entrar
+
+Pré-Condições:
+
+    Nenhuma.
+
+Pós-Condições:
+
+    Se o caso de uso foi bem-sucedido, o usuário agora está conectado ao sistema. Caso contrário, o estado do sistema é inalterado.
+
+5.
+Operação: criarUsuario()
+
+Ator principal: Administrador da Folha de Pagamento
+
+Referências cruzadas: Manter Informações Usuário
+
+Pré-Condições:
+
+    Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
+
+Pós-condições:
+
+    Adicionar um funcionário:
+
+    O sistema gera e atribui um novo número de identificação do funcionário.
+    O método padrão de entrega do contracheque é definido como "retirada".
+    As informações do novo funcionário são adicionadas ao sistema.
+    O sistema fornece ao administrador da folha de pagamento o novo ID do funcionário.
+
+    Atualizar um funcionário:
+
+    O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
+    O administrador da folha de pagamento pode fazer as alterações desejadas nas informações do funcionário.
+    Quando o administrador da folha de pagamento atualizar as informações necessárias, o sistema atualizará o cadastro do funcionário com as informações atualizadas.
+
+    Excluir um funcionário:
+
+    O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
+    O sistema marca o registro do funcionário para exclusão.
+    Na próxima vez que a folha de pagamento for executada, o sistema irá gerar um contracheque final.
+
+6.
+Operação: manterOrdem()
+
+Ator Principal: Funcionário Comissionado
+
+Referências cruzadas: Manter Ordem Compra
+
+Pré-Condições:
+
+    O Funcion ́ario Comissionado deve estar conectado ao sistema antes do in ́ıcio deste caso de uso
+
+Pós-condições:
+    
+    Se o caso de uso foi bem-sucedido, as informa ̧c ̃oes do pedido de compra s ̃ao adicionadas,
+    atualizadas ou exclu ́ıdas do sistema. Caso contr ́ario, o estado do sistema permanece inalterado.
+
+7.
+Operação: manterCartão()
+
+Ator Principal: Funcionário
+
+Referências cruzadas: Manter Cartão Ponto
+
+Pré-Condições:
+
+    O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
+
+Pós-condições:
+
+    Se o caso de uso for bem-sucedido, as informacões do cartão de ponto do funcionário serão
+    salvas no sistema. Caso contrário, o estado do sistema ́e inalterado.
+
+8.
+Operação: executarFolha()
+
+Ator Principal: Sistema
+
+Referências cruzadas: Executar Folha Pagamento
+
+Pré-Condições:
+
+    Existe uma folha de pagamento, e chegou o dia do pagamento
+
+Pós-condições:
+    Os pagamentos de cada funcion ́ario eleg ́ıvel para serem pagos na data atual foram processados.
+    Os funcionários marcados para serem excluidos foram removidos do sistema.
+
+9.
+Operação: selecionarMetodo()
+
+Ator Principal: Funcionário
+
+Referências cruzadas: Selecionar Método de Pagamento
+
+Pré-Condições:
+
+    O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
+
+Pós-condições:
+    
+    Se o caso de uso foi bem-sucedido, a forma de pagamento do Funcionário ́e atualizada no sistema
