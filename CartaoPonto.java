@@ -4,16 +4,37 @@ import java.util.List;
 
 public class CartaoPonto {
     
+    private int idFuncionario;
+    private double limiteHoras;
+
     private LocalDate inicioPeriodo;
     private LocalDate fimPeriodo;
     private boolean enviado;
     private List<Cobranca> cobrancas;
     
-    public CartaoPonto(LocalDate inicioPeriodo, LocalDate fimPeriodo) {
+    public CartaoPonto(int idFuncionario, int limiteHoras, LocalDate inicioPeriodo, LocalDate fimPeriodo) {
+        this.idFuncionario = idFuncionario;
+        this.limiteHoras = limiteHoras;
         this.inicioPeriodo = inicioPeriodo;
         this.fimPeriodo = fimPeriodo;
         this.enviado = false;
         this.cobrancas = new ArrayList<>();
+    }
+    
+    public int getFuncionario() {
+        return idFuncionario;
+    }
+    
+    public void setFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public double getLimiteHoras() {
+        return limiteHoras;
+    }
+
+    public void setLimiteHoras(double limiteHoras) {
+        this.limiteHoras = limiteHoras;
     }
     
     public LocalDate getInicioPeriodo() {
@@ -54,50 +75,14 @@ public class CartaoPonto {
         for (Cobranca cobranca : cobrancas) {
             totalHorasTrabalhadas += cobranca.getTotalHorasTrabalhadas();
         }
+
         // Validar se o total de horas trabalhadas excede o limite permitido para o funcionário
-        if (totalHorasTrabalhadas > Funcionario.getLimiteHorasTrabalhadas()) {
+        if (totalHorasTrabalhadas > this.getLimiteHoras()) {
             System.out.println("O total de horas trabalhadas excede o limite permitido para o funcionário.");
             return;
         }
         enviado = true;
         System.out.println("Cartão de ponto enviado com sucesso.");
-    }
-    
-}
-
-public class Cobranca {
-    
-    private int numero;
-    private double[] horasTrabalhadas;
-    
-    public Cobranca(int numero, int numeroDias) {
-        this.numero = numero;
-        this.horasTrabalhadas = new double[numeroDias];
-    }
-    
-    public int getNumero() {
-        return numero;
-    }
-    
-    public double[] getHorasTrabalhadas() {
-        return horasTrabalhadas;
-    }
-    
-    public void atualizarHorasTrabalhadas(LocalDate data, double horas) {
-        int index = data.getDayOfMonth() - 1;
-        if (horas > 24 || horas < 0) {
-            System.out.println("Número de horas inválido.");
-            return;
-        }
-        horasTrabalhadas[index] = horas;
-    }
-    
-    public double getTotalHorasTrabalhadas() {
-        double total = 0;
-        for (double horas : horasTrabalhadas) {
-            total += horas;
-        }
-        return total;
     }
     
 }

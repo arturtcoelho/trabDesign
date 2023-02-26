@@ -27,6 +27,8 @@ public class Entrar {
         
         // código a ser executado após o login ser realizado com sucesso
         
+        scanner.close();
+
     }
     
     private static boolean verificarCredenciais(String nomeUsuario, String senha) {
