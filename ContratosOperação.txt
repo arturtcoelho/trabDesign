@@ -2,7 +2,7 @@
 2.
 Operação: criarRelatorio(tipo, inicio, fim, nomes)
 
-Ator principal: Administrador
+Ator principal: Administrador da Folha
 
 Referências cruzadas: Caso de uso Criar Relatório Administrativo
 
@@ -12,7 +12,8 @@ Pré-condições:
 
 Pós-condições:
 
-    O sistema gera um relatório com as informações especificadas pelo Administrador da Folha de Pagamento com as informações: tipo de relatório, datas de início e fim do relatório e nome(s) do(s) funcionário(s).
+    O sistema gera um relatório com as informações especificadas pelo Administrador da Folha de Pagamento com as informações: 
+        tipo de relatório, datas de início e fim do relatório e nome(s) do(s) funcionário(s).
     Se o Administrador da Folha de Pagamento optar por salvar o relatório, o sistema salva o relatório no local e com o nome especificados.
 
 3.
@@ -28,7 +29,9 @@ Pré-condições:
 
 Pós-condições: 
     
-    Foi gerado um relatório com os dados especificados pelo funcionário (Tipo de relatório, Datas de início e término do relatório) e, se solicitado, foi salvo com o nome e local especificados.
+    Foi gerado um relatório com os dados especificados pelo funcionário:
+    Tipo de relatório, Datas de início e término do relatório, assim como o numero de cobrança, no caso do tipo de relatório TotalHorasProjeto
+    E, se solicitado, foi salvo com o nome e local especificados.
 
 4.
 Operação: entrar(nome, senha)
@@ -45,8 +48,8 @@ Pós-Condições:
 
     Se o caso de uso foi bem-sucedido, o usuário agora está conectado ao sistema. Caso contrário, o estado do sistema é inalterado.
 
-5.
-Operação: criarUsuario()
+5.1.
+Operação: criarUsuario(Nome, Tipo, Endereço, NumeroSegurançaSocial, DeduçõesPadrão, OutrasDeduções, Telefone, TaxaHoraria, Salário, Comissão, LimiteHoras)
 
 Ator principal: Administrador da Folha de Pagamento
 
@@ -65,20 +68,44 @@ Pós-condições:
     As informações do novo funcionário são adicionadas ao sistema.
     O sistema fornece ao administrador da folha de pagamento o novo ID do funcionário.
 
+5.2.
+Operação: atualizarUsuario(Nome, Tipo, Endereço, NumeroSegurançaSocial, DeduçõesPadrão, OutrasDeduções, Telefone, TaxaHoraria, Salário, Comissão, LimiteHoras)
+
+Ator principal: Administrador da Folha de Pagamento
+
+Referências cruzadas: Manter Informações Usuário
+
+Pré-Condições:
+
+    Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
+
+Pós-condições:
+
     Atualizar um funcionário:
 
     O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
-    O administrador da folha de pagamento pode fazer as alterações desejadas nas informações do funcionário.
     Quando o administrador da folha de pagamento atualizar as informações necessárias, o sistema atualizará o cadastro do funcionário com as informações atualizadas.
+
+5.3.
+Operação: excluirUsuario(id)
+
+Ator principal: Administrador da Folha de Pagamento
+
+Referências cruzadas: Manter Informações Usuário
+
+Pré-Condições:
+
+    Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
+
+Pós-condições:
 
     Excluir um funcionário:
 
     O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
-    O sistema marca o registro do funcionário para exclusão.
-    Na próxima vez que a folha de pagamento for executada, o sistema irá gerar um contracheque final.
+    O campo marcadoParaExclusão do funcionário é marcado como verdadeiro
 
-6.
-Operação: manterOrdem()
+6.1.
+Operação: criarOrdem(pontoContato, endereço, produtos, data)
 
 Ator Principal: Funcionário Comissionado
 
@@ -86,15 +113,45 @@ Referências cruzadas: Manter Ordem Compra
 
 Pré-Condições:
 
-    O Funcion ́ario Comissionado deve estar conectado ao sistema antes do in ́ıcio deste caso de uso
+    O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso
 
 Pós-condições:
     
-    Se o caso de uso foi bem-sucedido, as informa ̧c ̃oes do pedido de compra s ̃ao adicionadas,
-    atualizadas ou exclu ́ıdas do sistema. Caso contr ́ario, o estado do sistema permanece inalterado.
+    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são salvas no sistema
+    O pedido é atribuido ao funcionário comissionado
+
+6.2.
+Operação: atualizarOrdem(pontoContato, endereço, produtos, data)
+
+Ator Principal: Funcionário Comissionado
+
+Referências cruzadas: Manter Ordem Compra
+
+Pré-Condições:
+
+    O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso e deve existir uma ordem de compra
+
+Pós-condições:
+    
+    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são salvas no sistema
+
+6.3.
+Operação: excluirOrdem(id)
+
+Ator Principal: Funcionário Comissionado
+
+Referências cruzadas: Manter Ordem Compra
+
+Pré-Condições:
+
+    O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso
+
+Pós-condições:
+    
+    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são excluidos do sistema
 
 7.
-Operação: manterCartão()
+Operação: adicionaHorasCartão(quantidadeHoras)
 
 Ator Principal: Funcionário
 
@@ -108,11 +165,28 @@ Pós-condições:
 
     Se o caso de uso for bem-sucedido, as informacões do cartão de ponto do funcionário serão
     salvas no sistema. Caso contrário, o estado do sistema ́e inalterado.
+    As horas indicadas são marcadas no cartão
+
+7.1
+Operação: enviarCartão()
+
+Ator Principal: Funcionário
+
+Referências cruzadas: Manter Cartão Ponto
+
+Pré-Condições:
+
+    O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
+    Deve haver um cartão
+
+Pós-condições:
+
+    O cartão é marcado como enviado, portanto não pode mais ser modificado
 
 8.
 Operação: executarFolha()
 
-Ator Principal: Sistema
+Ator Principal: Relógio do Sistema
 
 Referências cruzadas: Executar Folha Pagamento
 
@@ -121,7 +195,7 @@ Pré-Condições:
     Existe uma folha de pagamento, e chegou o dia do pagamento
 
 Pós-condições:
-    Os pagamentos de cada funcion ́ario eleg ́ıvel para serem pagos na data atual foram processados.
+    Os pagamentos de cada funcionário elegível para serem pagos na data atual foram processados.
     Os funcionários marcados para serem excluidos foram removidos do sistema.
 
 9.
@@ -138,3 +212,6 @@ Pré-Condições:
 Pós-condições:
     
     Se o caso de uso foi bem-sucedido, a forma de pagamento do Funcionário ́e atualizada no sistema
+    Dependendo do tipo escolhido:
+        Correio: dados de endereço atualizados em tipoPagamento de funcionario
+        Depósito Direto: dados de banco e conta atualizados em tipoPagamento de funcionario
