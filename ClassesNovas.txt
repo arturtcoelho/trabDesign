@@ -1,10 +1,9 @@
-Relatorio
-    RelatorioHorasTotal
-    RelatorioPagamento
-    RelatorioHorasTrabalhadas
-    RelatorioHorasProjeto
-    RelatorioFeriasFolga
-    RelatorioPagamento
+Relatorio x
+    RelatorioHorasTotal x
+    RelatorioPagamento x
+    RelatorioHorasTrabalhadas x
+    RelatorioHorasProjeto x
+    RelatorioFeriasFolga x 
 RelatorioFactory
 Funcionario
     FuncionarioHorista
