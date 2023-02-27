@@ -104,185 +104,204 @@ Pós-condições:
     O sistema salva os dados no local indicado
     O sistema mostra uma mensagem de sucesso
 
-4.
-Operação: entrar(nome, senha)
-
-Ator principal: Usuário
-
+4.1
+Operação: entrar() -> void
 Referências cruzadas: Caso de uso Entrar
-
 Pré-Condições:
-
     Nenhuma.
-
 Pós-Condições:
+    O sistema mostra o formulario de nome e senha
 
-    Se o caso de uso foi bem-sucedido, o usuário agora está conectado ao sistema. Caso contrário, o estado do sistema é inalterado.
+4.2
+Operação: entrarDados(nome: String, senha: String) -> bool
+Referências cruzadas: Caso de uso Entrar
+Pré-Condições:
+    O funcionario deve ter preenchido o formulário de nome e senha
+Pós-Condições:
+    O sistema valida se a combinação de nome e senha estão corretos
+
+4.3
+Operação: login() -> void
+Referências cruzadas: Caso de uso Entrar
+Pré-Condições:
+    A validação de dados esta correta
+Pós-Condições:
+    O usuário esta logado no sistema
+
+4.3
+Operação: erro() -> void
+Referências cruzadas: Caso de uso Entrar
+Pré-Condições:
+    A validação de dados esta incorreta
+Pós-Condições:
+    O sistema mostra uma mensagem de erro
+    O sistema mostra a tela de login novamente
 
 5.1.
-Operação: criarUsuario(Nome, Tipo, Endereço, NumeroSegurançaSocial, DeduçõesPadrão, OutrasDeduções, Telefone, TaxaHoraria, Salário, Comissão, LimiteHoras)
-
-Ator principal: Administrador da Folha de Pagamento
-
+Operação: criarFuncionario() -> void
 Referências cruzadas: Manter Informações Usuário
-
 Pré-Condições:
-
     Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
-
 Pós-condições:
+    O sistema mostra o formulario com as informações do usuário
 
-    Adicionar um funcionário:
-
-    O sistema gera e atribui um novo número de identificação do funcionário.
-    O método padrão de entrega do contracheque é definido como "retirada".
-    As informações do novo funcionário são adicionadas ao sistema.
-    O sistema fornece ao administrador da folha de pagamento o novo ID do funcionário.
-
-5.2.
-Operação: atualizarUsuario(Nome, Tipo, Endereço, NumeroSegurançaSocial, DeduçõesPadrão, OutrasDeduções, Telefone, TaxaHoraria, Salário, Comissão, LimiteHoras)
-
-Ator principal: Administrador da Folha de Pagamento
-
+5.1.1.
+Operação: addFuncionario(Nome: String, Tipo: TipoFuncionario, Endereço: String, NumeroSegurançaSocial: String, DeduçõesPadrão: double, OutrasDeduções: double, Telefone: String, TaxaHoraria: double, Salário: double, Comissão: double, LimiteHoras: double) -> Id
 Referências cruzadas: Manter Informações Usuário
-
 Pré-Condições:
-
-    Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
-
+    O funcionario preencheu as informações de adicionar usuário
 Pós-condições:
+    O sistema gera um novo usuário no sistema com os dados fornecido
+    O sistema indica o ID do novo usuário gerado
 
-    Atualizar um funcionário:
+5.2.1
+Operação: atualizarFuncionario(id: TipoID) -> void
+Ator principal: Administrador da Folha de Pagamento
+Referências cruzadas: Manter Informações Usuário
+Pré-Condições:
+    Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
+    O usuário deve estar na tela do usuário que deseja modificar
+Pós-condições:
+    O sistema mostra o formulario com as informações do usuário atual
 
-    O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
-    Quando o administrador da folha de pagamento atualizar as informações necessárias, o sistema atualizará o cadastro do funcionário com as informações atualizadas.
+5.2.2
+Operação: updateFuncionario(Nome: String, Tipo: TipoFuncionario, Endereço: String, NumeroSegurançaSocial: String, DeduçõesPadrão: double, OutrasDeduções: double, Telefone: String, TaxaHoraria: double, Salário: double, Comissão: double, LimiteHoras: double) -> void
+Ator principal: Administrador da Folha de Pagamento
+Referências cruzadas: Manter Informações Usuário
+Pré-Condições:
+    O usuário preenche as informações que deseja atualizar
+Pós-condições:
+    O sistema grava os dados atualizados no sistema
+    O sistema exibe a tela com os dadso atualizados
 
 5.3.
-Operação: excluirUsuario(id)
-
-Ator principal: Administrador da Folha de Pagamento
-
+Operação: excluirUsuario(id: TipoId) -> void
 Referências cruzadas: Manter Informações Usuário
-
 Pré-Condições:
-
     Para utilizar este serviço, é necessário ter acesso ao sistema de folha de pagamento e ser um administrador da folha de pagamento com permissão para adicionar, atualizar ou excluir informações de funcionários.
-
+    O usuário deve estar na tela de funcionário
 Pós-condições:
-
-    Excluir um funcionário:
-
     O sistema recupera e exibe as informações do funcionário com base no ID fornecido pelo administrador da folha de pagamento.
     O campo marcadoParaExclusão do funcionário é marcado como verdadeiro
 
-6.1.
-Operação: criarOrdem(pontoContato, endereço, produtos, data)
-
-Ator Principal: Funcionário Comissionado
-
+6.1.1
+Operação: criarOrdem() -> void
 Referências cruzadas: Manter Ordem Compra
-
 Pré-Condições:
-
     O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso
-
 Pós-condições:
-    
-    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são salvas no sistema
+    O sistema mostra a tela de formulario dos dados de ordem
+
+6.1.2
+Operação: addOrdem(pontoContato: TipoPonto, endereço: String, produtos: TipoProduto, data: Data) -> id
+Referências cruzadas: Manter Ordem Compra
+Pré-Condições:
+    O usuário preenche os dados do formulario
+Pós-condições:
+    As informações do pedido de compra são salvas no sistema
     O pedido é atribuido ao funcionário comissionado
+    O sistema mostra o id da ordem de compra gerado
 
 6.2.
-Operação: atualizarOrdem(pontoContato, endereço, produtos, data)
-
-Ator Principal: Funcionário Comissionado
-
+Operação: atualizarOrdem(idOrdem: TipoId) -> void
 Referências cruzadas: Manter Ordem Compra
-
 Pré-Condições:
-
     O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso e deve existir uma ordem de compra
-
+    O funcionario deve selecionar a ordem que quer modificar
 Pós-condições:
-    
-    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são salvas no sistema
+    O sistema mostra o formulario com os dados que o cliente quer modificar
+
+6.2.
+Operação: atualizarOrdem(pontoContato: TipoPonto, endereço: String, produtos: TipoProduto, data: Data) -> void
+Referências cruzadas: Manter Ordem Compra
+Pré-Condições:
+    O usuário deve ter preenchido o formulario
+Pós-condições:
+    As informações do pedido de compra são salvas no sistema
+    O Sistema mostra as informações atualizadas na tela
 
 6.3.
-Operação: excluirOrdem(id)
-
-Ator Principal: Funcionário Comissionado
-
+Operação: excluirOrdem(id) -> void
 Referências cruzadas: Manter Ordem Compra
-
 Pré-Condições:
-
     O Funcionário Comissionado deve estar conectado ao sistema antes do início deste caso de uso
-
+    O usuario deve estar na tela do usuário que quer excluir
 Pós-condições:
-    
-    Se o caso de uso foi bem-sucedido, as informações do pedido de compra são excluidos do sistema
+    As informações do pedido de compra são excluidos do sistema
 
 7.
-Operação: adicionaHorasCartão(quantidadeHoras)
-
-Ator Principal: Funcionário
-
+Operação: manterCartão() -> void
 Referências cruzadas: Manter Cartão Ponto
-
 Pré-Condições:
-
     O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
-
+    O funcionario deve estar na tela de funcionario
 Pós-condições:
+    O sistema mostra a tela com os dados do cartão
+    O sistema seleciona o cartão ponto
 
-    Se o caso de uso for bem-sucedido, as informacões do cartão de ponto do funcionário serão
-    salvas no sistema. Caso contrário, o estado do sistema ́e inalterado.
-    As horas indicadas são marcadas no cartão
+7.1.1
+Operação: getCobranças() -> listaCobranças
+Referências cruzadas: Manter Cartão Ponto
+Pré-Condições:
+    O funcionario iniciou o fluxo manterCartão
+Pós-condições:
+    O sistema busca a lista com o numero de Cobranças
+    O sistema mostra os numeros de cobranças na tela
+
+
+7.1.2
+Operação: selecionarCobranças(cobranças: int) -> void
+Referências cruzadas: Manter Cartão Ponto
+Pré-Condições:
+    O funcionario selecionou o numero de cobrança
+Pós-condições:
+    O sistema mostra o numero selecionado na tela
+    O sistema grava a cobrança no cartão ponto gerado
+
+7.
+Operação: manterCartão(quantidadeHoras: double) -> void
+Referências cruzadas: Manter Cartão Ponto
+Pré-Condições:
+    O funcionario deve selecionar a quantidade de horas para cada cobrança
+Pós-condições:
+    O sistema grava as horas selecionadas
+    O sistema mostra uma mensagem de sucesso
+    O sistema grava o cartão com as horas selecionadas
 
 7.1
-Operação: enviarCartão()
-
-Ator Principal: Funcionário
-
+Operação: enviarCartão(cartão: Cartão) -> void
 Referências cruzadas: Manter Cartão Ponto
-
 Pré-Condições:
-
     O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
     Deve haver um cartão
-
 Pós-condições:
-
-    O cartão é marcado como enviado, portanto não pode mais ser modificado
+    O cartão é marcado como enviado, não podendo mais ser modificado
 
 8.
-Operação: executarFolha()
-
-Ator Principal: Relógio do Sistema
-
+Operação: executarFolha() -> void
 Referências cruzadas: Executar Folha Pagamento
-
 Pré-Condições:
-
     Existe uma folha de pagamento, e chegou o dia do pagamento
-
 Pós-condições:
     Os pagamentos de cada funcionário elegível para serem pagos na data atual foram processados.
     Os funcionários marcados para serem excluidos foram removidos do sistema.
 
 9.
-Operação: selecionarMetodo()
-
-Ator Principal: Funcionário
-
+Operação: selecionarMetodo() -> void
 Referências cruzadas: Selecionar Método de Pagamento
-
 Pré-Condições:
-
     O Funcionário deve estar conectado ao sistema antes do início deste caso de uso
-
 Pós-condições:
-    
-    Se o caso de uso foi bem-sucedido, a forma de pagamento do Funcionário ́e atualizada no sistema
-    Dependendo do tipo escolhido:
-        Correio: dados de endereço atualizados em tipoPagamento de funcionario
-        Depósito Direto: dados de banco e conta atualizados em tipoPagamento de funcionario
+    O sistema mostra as opções de forma de pagamento
+
+9.
+Operação: selecionarMetodo(formaPag: FormaPagamento) -> void
+Referências cruzadas: Selecionar Método de Pagamento
+Pré-Condições:
+    O Funcionário deve selecionar a forma de pagamento desejada
+Pós-condições:
+    A forma de pagamento do Funcionário ́e atualizada no sistema
+    Os dados são gravados na forma de pagamento:
+    Correio: dados de endereço atualizados em tipoPagamento de funcionario
+    Depósito Direto: dados de banco e conta atualizados em tipoPagamento de funcionario
+    O sistema mostra a tela de sucesso com o dado escolhido
