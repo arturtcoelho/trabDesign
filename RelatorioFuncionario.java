@@ -75,4 +75,5 @@ public class RelatorioFuncionario {
         // Lógica para gerar relatório de pagamento total acumulado no ano
         System.out.println("Relatório de Pagamento Total Acumulado no Ano"
     }
+    
 }

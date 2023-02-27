@@ -32,4 +32,5 @@ public class FolhaPagamento {
     private void excluirFuncionario(Funcionario funcionario) {
         this.listaFuncionarios.remove(funcionario);
     }
+    
 }

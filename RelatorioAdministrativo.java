@@ -53,4 +53,5 @@ public class RelatorioAdministrativo {
         // Salva o relatório no local e com o nome especificados
         System.out.println("Salvando relatório em " + localRelatorio + "/" + nomeRelatorio);
     }
+    
 }

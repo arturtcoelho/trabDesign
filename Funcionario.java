@@ -152,4 +152,5 @@ public class Funcionario {
     public double calcularPagamento() {
         return (this.calcularSalario() - this.getDeducoesFiscaisPadrao()) - this.getOutrasDeducoes();
     }
+    
 }
