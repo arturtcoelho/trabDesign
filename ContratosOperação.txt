@@ -1,37 +1,108 @@
-
 2.
-Operação: criarRelatorio(tipo, inicio, fim, nomes)
-
-Ator principal: Administrador da Folha
-
+Operação: criarRelatorio() -> void
 Referências cruzadas: Caso de uso Criar Relatório Administrativo
-
 Pré-condições:
-
     O administrador da folha de pagamento deve estar conectado ao sistema.
-
 Pós-condições:
+    O sistema gera mostra o formulario com os campos tipo, data inicio, data fim e nomes dos funcionarios
 
-    O sistema gera um relatório com as informações especificadas pelo Administrador da Folha de Pagamento com as informações: 
-        tipo de relatório, datas de início e fim do relatório e nome(s) do(s) funcionário(s).
-    Se o Administrador da Folha de Pagamento optar por salvar o relatório, o sistema salva o relatório no local e com o nome especificados.
+2.1.
+Operação: entraDados(tipo: TipoDados, dataInicio: Data, dataFim: Data, nomeFuncionarios: Lista de Nomes) -> void
+Referências cruzadas: Caso de uso Criar Relatório Administrativo
+Pré-condições:
+    Deve ter sido iniciado o relatório, mostrando o formulario de dados
+Pós-condições:
+    O sistema gera um relatório com os dados
+    O sistema mostra uma tela com o relatório gerado
+
+2.2.
+Operação: salvarRelatório() -> void
+Referências cruzadas: Caso de uso Criar Relatório Administrativo
+Pré-condições:
+    O sistema deve ter gerado um relatório e mostrado ele na tela
+Pós-condições:
+    O sistema mostra o formulario pedindo os dados de onde salvar
+
+2.3.
+Operação: salvarEm() -> void
+Referências cruzadas: Caso de uso Criar Relatório Administrativo
+Pré-condições:
+    O sistema deve ter mostrado o formulario com local e nome para salvar
+Pós-condições:
+    O sistema mostra salva o relatório no local indicado
+    O sistema pede a confirmação dos dados
+
+2.4.
+Operação: confirma(confirmação: bool) -> void
+Referências cruzadas: Caso de uso Criar Relatório Administrativo
+Pré-condições:
+    O sistema deve ter mostrado a mensagem de confirmação com os dados
+    O funcionario deve ter confirmado a mensagem
+Pós-condições:
+    O sistema salva os dados no local indicado
+    O sistema mostra uma mensagem de sucesso
 
 3.
-Operação: criarRelatorio(tipo, inicio, fim)
-
-Ator principal: Funcionário
-
+Operação: criarRelatorio() -> void
 Referências cruzadas: Caso de uso Criar Relatório de Funcionário
-
 Pré-condições:
-
     O funcionário deve estar conectado ao sistema antes de iniciar o caso de uso.
-
 Pós-condições: 
+    O sistema mostra o formulario pedindo os dados
     
-    Foi gerado um relatório com os dados especificados pelo funcionário:
-    Tipo de relatório, Datas de início e término do relatório, assim como o numero de cobrança, no caso do tipo de relatório TotalHorasProjeto
-    E, se solicitado, foi salvo com o nome e local especificados.
+3.1
+Operação: entraDados(tipoRelatorio: TipoRelatório, dataIni: Data, dataFim: Data) -> void
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O funcionário deve preencher os dados do formulário
+Pós-condições: 
+    O sistema gera um relatório com os dados
+    O sistema mostra o relatorio com os dados selecionados
+    
+3.1.1
+Operação: getCobrança() -> Lista Cobranças
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O funcionário deve preencher os dados do formulário
+    O tipo de relatorio deve ser "TotalHoralProjeto"
+Pós-condições: 
+    O sistema mostra os numeros de cobrança disponivel
+
+3.1.2
+Operação: selecionaCobrança(numCobrança) -> void
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O funcionario deve selecionar o numero de cobrança
+Pós-condições: 
+    O sistema grava o numero de cobrança selecionado
+    O sistema mostra esse dado com o relatorio selecionado
+
+3.2
+Operação: salvarRelatorio(relatorio: Relatorio) -> void
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O funcionário deve escolher salvar o relatorio mostrado
+Pós-condições: 
+    O sistema grava o relatório
+    O sistema mostra o formulario de seleção de local para salvar
+
+3.3
+Operação: salvarEm(nome: String, local: String) -> void
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O funcionário deve preencher o formulario de seleção de local para salvar
+Pós-condições: 
+    O sistema mostra a confirmação de local para salvar
+
+3.4.
+Operação: confirma(confirmação: bool) -> void
+Referências cruzadas: Caso de uso Criar Relatório de Funcionário
+Pré-condições:
+    O sistema deve ter mostrado a mensagem de confirmação com os dados
+    O funcionario deve ter confirmado a mensagem
+Pós-condições:
+    O sistema salva os dados no local indicado
+    O sistema mostra uma mensagem de sucesso
 
 4.
 Operação: entrar(nome, senha)
